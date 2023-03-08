@@ -193,6 +193,6 @@ contract DaiJoin {
         vat.move(msg.sender, address(this), mul(ONE, wad));
         console.log("wad", wad);
         dai.mintz(usr, wad);
-        emit Exit(usr, wad);
+        //emit Exit(usr, wad);
     }
 }
