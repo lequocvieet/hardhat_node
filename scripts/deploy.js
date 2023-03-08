@@ -5,43 +5,38 @@ async function main() {
   //------------------------------Set up oracle Price----------------------------------
 
   //Setup account 
-  var [account0, account1, account2, account3, account4, account5, account10, account11, account12] = await ethers.getSigners();
+  var [account0, account1, account2, account3] = await ethers.getSigners();
 
   console.log("contract owner", account0.address)
   console.log("account1", account1.address)
   console.log("account2", account2.address)
-  console.log("account3", account3.address)
-  console.log("account4", account4.address)
-  console.log("account5", account5.address)
-  console.log("account10", account10.address)
-  console.log("account11", account11.address)
-  console.log("account12", account12.address)
+  console.log("account3", account3.address) 
 
   //---------------------------------CONTRACT OWNER DEPLOY------------------------
   //Deploy Vote
   VoteFactory = await hre.ethers.getContractFactory("VoteFactory");
-  const vote = await VoteFactory.connect(account0).deploy();
+  const vote = await VoteFactory.deploy();
   await vote.deployed();
   console.log("Vote contract deployed at ", vote.address)
 
 
   //Deploy Median contract
   Median = await hre.ethers.getContractFactory("contracts/dai/oracle-module/median.sol:Median");
-  median = await Median.connect(account0).deploy();
+  median = await Median.deploy();
   await median.deployed();
   console.log("Median deploy at:", median.address)
 
 
   //Deploy OSM contract
   OSM = await hre.ethers.getContractFactory("contracts/dai/oracle-module/osm.sol:OSM");
-  osm = await OSM.connect(account0).deploy(median.address);
+  osm = await OSM.deploy(median.address);
   await osm.deployed();
   console.log("OSM deploy at:", osm.address)
 
 
   //Deploy Vat 
   Vat = await hre.ethers.getContractFactory("Vat");
-  vat = await Vat.connect(account0).deploy();
+  vat = await Vat.deploy();
   await vat.deployed();
   console.log("Vat deploy at:", vat.address)
 
@@ -53,7 +48,7 @@ async function main() {
 
   //Deploy Spot
   Spot = await hre.ethers.getContractFactory("Spotter");
-  spot = await Spot.connect(account0).deploy(vat.address)
+  spot = await Spot.deploy(vat.address)
   await spot.deployed();
   console.log("Spot deploy at:", spot.address)
 
@@ -64,7 +59,6 @@ async function main() {
   console.log("BAT deploy at:", bat.address)
 
   //Deploy Dai(DSToken) for using in DaiJoin
-  Dai = await hre.ethers.getContractFactory("contracts/dai/liquidation-auction-module/token.sol:DSToken");
   dai = await DSToken.deploy("DAI");
   await dai.deployed();
   console.log("DAI deploy at:", dai.address)
@@ -92,11 +86,11 @@ async function main() {
   //---------------------------------------AUTHORIZE PERMISSION-------------------------
 
   //Authorize for jug to call vat
-  await vat.connect(account0).rely(jug.address)
+  await vat.rely(jug.address)
 
   //Authorize for daiJoin.sol permission to call mint
-  await ds_roles.connect(account0).setRootUser(daiJoin.address, true);
-  await dai.connect(account0).setAuthority(ds_roles.address)
+  await ds_roles.setRootUser(daiJoin.address, true);
+  await dai.setAuthority(ds_roles.address)
 
 
   saveBuildFiles(vote, "VoteFactory", "")
@@ -141,7 +135,7 @@ function saveBuildFiles(contract, name, artifact_direct) {
 
   //Save file to Backend directory
 
-  const backEndDir = "/home/vieet/Desktop/dai_back-end/abis";
+  const backEndDir = "/home/lequocvieet/Desktop/dai_back_end/abis";
   if (!fs.existsSync(backEndDir)) {
     fs.mkdirSync(backEndDir);
   }
@@ -164,7 +158,7 @@ function saveBuildFiles(contract, name, artifact_direct) {
 
   //Save file to FrontEnd directory
 
-  const frontEndDir = "/home/vieet/Desktop/aragon_client/src/abis";
+  const frontEndDir = "/home/lequocvieet/Desktop/aragon_client/src/abis";
   if (!fs.existsSync(frontEndDir)) {
     fs.mkdirSync(frontEndDir);
   }

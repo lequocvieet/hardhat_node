@@ -50,8 +50,9 @@ contract DSToken is DSMath, DSAuth {
     }
 
     function approve(address guy, uint wad) public stoppable returns (bool) {
+      
         allowance[msg.sender][guy] = wad;
-
+        console.log("come here");
         emit Approval(msg.sender, guy, wad);
 
         return true;
@@ -104,6 +105,7 @@ contract DSToken is DSMath, DSAuth {
     }
 
     function mintz(address guy, uint wad) public auth stoppable {
+        console.log("go through here");
         balanceOf[guy] = add(balanceOf[guy], wad);
         totalSupply = add(totalSupply, wad);
         emit Mint(guy, wad);

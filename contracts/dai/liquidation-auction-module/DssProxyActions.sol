@@ -675,13 +675,16 @@ contract DssProxyActions is Common {
             _getDrawDart(vat, jug, urn, ilk, wadD)
         );
         // Moves the DAI amount (balance in the vat in rad) to proxy's address
+        console.log("go here");
         move(manager, cdp, address(this), toRad(wadD));
         // Allows adapter to access to proxy's DAI balance in the vat
         if (VatLike(vat).can(address(this), address(daiJoin)) == 0) {
             VatLike(vat).hope(daiJoin);
         }
         // Exits DAI to the user's wallet as a token
+        console.log("go here");
         DaiJoinLike(daiJoin).exit(msg.sender, wadD);
+        console.log("end here");
     }
 
     function openLockGemAndDraw(
@@ -963,6 +966,7 @@ contract DssProxyActionsDsr is Common {
     }
 
     function exit(address daiJoin, address pot, uint wad) public {
+        console.log("come here");
         VatLike vat = DaiJoinLike(daiJoin).vat();
         // Executes drip to count the savings accumulated until this moment
         uint chi = PotLike(pot).drip();
