@@ -146,11 +146,11 @@ contract VoteFactory {
         emit EndVote(pollID, pollIDToPoll[pollID].finalResult);
     }
 
-    function getListPoll() public view returns (Poll[] memory) {
-        return polls;
-    }
-
-    function Retrieve(address _AccountAddress) public view returns (uint256) {
-        return _AccountAddress.balance;
+    function getListPollWithID () public view returns (Poll[] memory){
+        Poll[]  memory myListPolls = new Poll[](pollCount);
+        for(uint i=1;i<= pollCount ; i++){
+            myListPolls[i-1]=pollIDToPoll[i];
+        }
+        return myListPolls;
     }
 }
