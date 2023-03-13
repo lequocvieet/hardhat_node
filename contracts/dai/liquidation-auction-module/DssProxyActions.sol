@@ -674,6 +674,7 @@ contract DssProxyActions is Common {
             toInt(convertTo18(gemJoin, amtC)),
             _getDrawDart(vat, jug, urn, ilk, wadD)
         );
+        console.log("go here");
         // Moves the DAI amount (balance in the vat in rad) to proxy's address
         move(manager, cdp, address(this), toRad(wadD));
         // Allows adapter to access to proxy's DAI balance in the vat
@@ -682,6 +683,7 @@ contract DssProxyActions is Common {
         }
         // Exits DAI to the user's wallet as a token
         DaiJoinLike(daiJoin).exit(msg.sender, wadD);
+        console.log("go here");
     }
 
     function openLockGemAndDraw(

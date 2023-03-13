@@ -50,8 +50,8 @@ contract OSM is LibNote {
     }
 
     address public src;
-    uint16 constant ONE_SECOND = uint16(1);
-    uint16 public hop = ONE_SECOND;
+    uint16 constant ONE_HOUR = uint16(1);
+    uint16 public hop = ONE_HOUR;
     uint64 public zzz;
 
     struct Feed {

@@ -154,6 +154,7 @@ contract Vat {
     }
 
     function move(address src, address dst, uint256 rad) external {
+        console.log("vat move");
         require(wish(src, msg.sender), "Vat/not-allowed");
         dai[src] = _sub(dai[src], rad);
         dai[dst] = _add(dai[dst], rad);
@@ -232,6 +233,7 @@ contract Vat {
 
         urns[i][u] = urn;
         ilks[i] = ilk;
+        console.log("end frob at vat here");
     }
 
     // --- CDP Fungibility ---
