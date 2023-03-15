@@ -145,7 +145,9 @@ contract VoteFactory {
         pollIDToPoll[pollID].finalResult = pollIDToPoll[pollID].countResult;
         emit EndVote(pollID, pollIDToPoll[pollID].finalResult);
     }
-
+    function getListPoll() public view returns (Poll[] memory) {
+        return polls;
+    }
     function getListPollWithID () public view returns (Poll[] memory){
         Poll[]  memory myListPolls = new Poll[](pollCount);
         for(uint i=1;i<= pollCount ; i++){

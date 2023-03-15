@@ -135,7 +135,7 @@ function saveBuildFiles(contract, name, artifact_direct) {
 
   //Save file to Backend directory
 
-  const backEndDir = "/home/lequocvieet/Desktop/dai_back_end/abis";
+  const backEndDir = "/home/pham/aragon-client/Dai_BackEnd/abis";
   if (!fs.existsSync(backEndDir)) {
     fs.mkdirSync(backEndDir);
   }
@@ -158,7 +158,7 @@ function saveBuildFiles(contract, name, artifact_direct) {
 
   //Save file to FrontEnd directory
 
-  const frontEndDir = "/home/lequocvieet/Desktop/aragon_client/src/abis";
+  const frontEndDir = "/home/pham/aragon-client/aragon_client/src/abis";
   if (!fs.existsSync(frontEndDir)) {
     fs.mkdirSync(frontEndDir);
   }

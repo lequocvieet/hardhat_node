@@ -141,4 +141,7 @@ contract DSToken is DSMath, DSAuth {
     function getBalance() public view returns (uint256) {
         return balanceOf[msg.sender];
     }
+    function getAddressBalance(address reciever) public view returns (uint256){
+        return balanceOf[reciever];
+    }
 }

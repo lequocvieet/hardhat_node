@@ -4,12 +4,12 @@ const VatAddress = require("../contracts/abis/Vat-address.json")
 const SpotAddress = require("../contracts/abis/Spotter-address.json")
 const OSMAddress = require("../contracts/abis/OSM-address.json")
 const JugAddress = require("../contracts/abis/Jug-address.json")
-const DSRolesAddress =require("../contracts/abis/DSRoles-address.json")
-const DaiAddress =require("../contracts/abis/DAI-address.json")
-const DaiJoinAddress=require("../contracts/abis/DaiJoin-address.json")
+const DSRolesAddress = require("../contracts/abis/DSRoles-address.json")
+const DaiAddress = require("../contracts/abis/DAI-address.json")
+const DaiJoinAddress = require("../contracts/abis/DaiJoin-address.json")
 
 
-async function main () {
+async function main() {
     //Setup account 
     var [account0, account1, account2, account3] = await ethers.getSigners();
 
